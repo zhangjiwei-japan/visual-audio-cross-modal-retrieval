@@ -78,7 +78,7 @@ def train_model(samam,lamada,alpha ,beta, gamma,lr,num_epoch,data_path):
 
         print('Epoch {}/{},samam {},lamada {},alpha {},beta {},gamma {},lr {:.5f}, all_loss: {:.4f}'.format(epoch, num_epoch, samam,lamada,alpha ,beta, gamma ,optimizer.param_groups[0]['lr'] ,running_loss))
         if epoch >0 and epoch%5==0:
-            torch.save(model_ft.state_dict(), 'save_models/vae_visual_ccn_{}_ave.pth'.format(epoch))
+            torch.save(model_ft.state_dict(), 'save_models/vae_visual_ccn_{}_vegas.pth'.format(epoch))
 
 def evaluate_model(model_path,data_path):
     
@@ -140,7 +140,7 @@ def evaluate_model(model_path,data_path):
 
 import time
 if __name__=='__main__':
-    data_path = "data_sets/ave_feature_norm.h5" # vegas_feature.h5  AVE_feature_updated_squence.h5
+    data_path = "data_sets/vegas_feature_norm.h5" 
     now =  time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
     lr = 1e-4 #3.5e-3 
     num_epoch = 500
@@ -149,7 +149,7 @@ if __name__=='__main__':
     gamma = 0.01
     samam = 0.0001
     lamada = 1
-    num_class = 15
-    model_path = 'save_models/vae_visual_ccn_'+ str(num_epoch-5)+"_ave.pth"
+    num_class = 10
+    model_path = 'save_models/vae_visual_ccn_'+ str(num_epoch-5)+"_vegas.pth"
     train_model(samam,lamada,alpha,beta, gamma ,lr,num_epoch,data_path)
     evaluate_model(model_path,data_path)
